@@ -1,0 +1,74 @@
+{
+  "machines": [
+    {
+      "id": 1,
+      "name": "Test CNC",
+      "options": [
+        { "Param one": "value one 11111111111111111" }
+      ],
+      "image": "/machine_images/1.png",
+      "status": 1,
+      "type": 1,
+      "place": "Test place",
+      "last_seen": 1580433420
+    },
+    {
+      "id": 2,
+      "name": "Test CNC",
+      "image": "/machine_images/1.jpg",
+      "options": [
+        { "Param one": "value one" },
+        { "Param two": "value two" }
+      ],
+      "status": 0,
+      "type": 2,
+      "place": "Test place",
+      "last_seen": 1580433420
+    },
+    {
+      "id": 3,
+      "name": "Test CNC",
+      "image": "/machine_images/3.png",
+      "status": 2,
+      "type": 5,
+      "place": "Test place",
+      "last_seen": 1580433420
+    },
+    {
+      "id": 4,
+      "name": "Test CNC",
+      "image": "/machine_images/2.png",
+      "status": 0,
+      "type": 1,
+      "place": "Test place",
+      "last_seen": 1580433420
+    },
+    {
+      "id": 5,
+      "name": "Test CNC",
+      "image": "/machine_images/2.png",
+      "status": 0,
+      "type": 1,
+      "place": "Test place",
+      "last_seen": 1580433420
+    },
+    {
+      "id": 6,
+      "name": "Test CNC",
+      "image": "/machine_images/2.png",
+      "status": 0,
+      "type": 1,
+      "place": "Test place",
+      "last_seen": 1580433420
+    },
+    {
+      "id": 7,
+      "name": "Test CNC",
+      "image": "/machine_images/2.png",
+      "status": 0,
+      "type": 1,
+      "place": "Test place",
+      "last_seen": 1580433420
+    }
+  ]
+}

@@ -1,8 +1,13 @@
 import React from 'react';
+import { languages } from './Lang';
 
-function PageError() {
+function PageError(props) {
     return (
-        <div>404!</div>
+        <div class="center-of-page">
+            <div>
+                {languages[props.current_lang].not_found}
+            </div>
+        </div>
     );
 }
 

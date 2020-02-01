@@ -1,0 +1,23 @@
+@media (min-width:576px) {
+    .MachineImg {
+        min-height: 250px;
+    }
+    .MachineCard {
+        max-width: 250px;
+        min-width: 250px;
+    }
+}
+
+.MachineCard {
+    margin-top: 25px !important;
+}
+
+.MachineCard .parameter {
+    padding-bottom: .3em;
+    border-bottom: 1px rgba(0,0,0,.125) solid;
+}
+
+.MachineCard .parameter:last-of-type {
+    border-bottom: none;
+}
+
