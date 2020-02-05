@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert'
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { languages, getLangString } from './Lang';
+import { getApiLink } from './Api';
+import MachineInfo from './MachineInfo';
+import MachineAdvancedInfo from './MachineAdvancedInfo';
 
 class Machines extends Component {
     constructor(props) {
@@ -13,9 +19,20 @@ class Machines extends Component {
             isError: false,
             machine_id: null,
             machine: null,
+            machine_realtime: null,
             reconnect_timer: null
         };
         this.socket = null;
+        fetch('/'+getApiLink('get_machine'))
+        .then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({ machine: responseJson.machine });
+          //this.setState({ isLoding: false });
+        })
+        .catch((error) => {
+          //this.setState({current_error: error});
+          console.error(error);
+        });
     }
     socketConnection(th) {
         th.socket = new WebSocket("ws://" + document.domain + ":9001/?machine_id=" + th.state.machine_id + "&client_id=" + th.state.client_id);
@@ -35,7 +52,9 @@ class Machines extends Component {
             clearInterval(th.state.reconnect_timer);
             th.setState({ reconnect_timer: null });
             var jsonString = JSON.stringify({ action: "start", language: th.state.current_lang })
-            if(th.socket.readyState === 1) th.socket.send(jsonString);
+            if (th.socket !== null) {
+                if (th.socket.readyState === 1) th.socket.send(jsonString);
+            }
         }
         th.socket.onclose = () => {
             th.setState({ isError: true });
@@ -51,7 +70,7 @@ class Machines extends Component {
         }
         th.socket.onmessage = (messange) => {
             var msg = JSON.parse(messange.data);
-            th.setState({ machine: msg.machine });
+            th.setState({ machine_realtime: msg.machine });
         }
     }
     componentDidMount() {
@@ -66,6 +85,9 @@ class Machines extends Component {
                 <div className="container">
                     {header}
                     <div>{getLangString(languages, this.state.current_lang, "loading")} ...</div>
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
                     <div>{this.state.isError == true && <Alert variant="danger">{getLangString(languages, this.state.current_lang, "load_error")}</Alert>}</div>
                 </div>
             );
@@ -75,11 +97,10 @@ class Machines extends Component {
                 <div className="container">
                     {header}
                     <p>{getLangString(languages, this.state.current_lang, "connected")}</p>
-                    <ul>
-                        <li>{this.state.machine.one}</li>
-                        <li>{this.state.machine.two}</li>
-                        <li>{this.state.machine.three}</li>
-                    </ul>
+                    <MachineInfo current_lang={this.state.current_lang} info={this.state.machine}>
+                        <h4>{getLangString(languages, this.state.current_lang, "realtime_information_title")}</h4>
+                        <MachineAdvancedInfo current_lang={this.state.current_lang} info={this.state.machine_realtime} />
+                    </MachineInfo>
                 </div>
             );
         }
@@ -88,6 +109,9 @@ class Machines extends Component {
                 <div className="container">
                     {header}
                     <p>{getLangString(languages, this.state.current_lang, "waiting_data")}</p>
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
                     <div>{this.state.isError == true && <Alert variant="danger">{getLangString(languages, this.state.current_lang, "load_error")}</Alert>}</div>
                 </div>
             );

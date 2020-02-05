@@ -8,6 +8,8 @@ const languages = {
         documents_dashboard_title: "Документация на систему",
         documents_cnc_title: "Документация на ЧПУ",
         machine: "Станок",
+        machine_main_info_title: "Основная информация",
+        machine_advanced_info_title: "Дополнительная информация",
         // Страницы
         home_page: "На главную",
         docs_page: "Документация",
@@ -31,6 +33,8 @@ const languages = {
         documents_dashboard_title: "Documentation for dashboard",
         documents_cnc_title: "CNC documentation",
         machine: "Machine",
+        machine_main_info_title: "Main information",
+        machine_advanced_info_title: "Advanced information",
         // Pages
         home_page: "Home",
         docs_page: "Documentation",
